@@ -1,4 +1,3 @@
-
 import SwiftUI
 
 struct AnimalsNearYouView: View {
@@ -15,13 +14,12 @@ struct AnimalsNearYouView: View {
       }
       .task {
         await fetchAnimals()
-
       }
       .listStyle(.plain)
       .navigationTitle("Animals near you")
-      .overlay{
+      .overlay {
         if isLoading {
-          ProgressView("finding animals near you...")
+          ProgressView("Finding Animals near you...")
         }
       }
     }.navigationViewStyle(StackNavigationViewStyle())
@@ -29,12 +27,15 @@ struct AnimalsNearYouView: View {
 
   func fetchAnimals() async {
     do {
-      let animalsContainer: AnimalsContainer = try await
-      requestManager.perform(AnimalsRequest.getAnimalsWith(page: 1, latitude: nil, longitude: nil))
-      self.animals = animalsContainer.animals
-     await stopLoading()
-
-    } catch {}
+      let animalsContainer: AnimalsContainer = try await requestManager.perform(AnimalsRequest.getAnimalsWith(
+        page: 1,
+        latitude: nil,
+        longitude: nil))
+      let animals = animalsContainer.animals
+      self.animals = animals
+      await stopLoading()
+    } catch {
+    }
   }
 
   @MainActor
@@ -45,6 +46,6 @@ struct AnimalsNearYouView: View {
 
 struct AnimalsNearYouView_Previews: PreviewProvider {
   static var previews: some View {
-    AnimalsNearYouView()
+    AnimalsNearYouView(animals: Animal.mock, isLoading: false)
   }
 }

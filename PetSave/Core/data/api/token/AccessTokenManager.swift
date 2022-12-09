@@ -39,6 +39,7 @@ extension AccessTokenManager: AccessTokenManagerProtocol {
     self.accessToken = token
   }
 }
+
 private extension AccessTokenManager {
   func save(token: APIToken) {
     userDefaults.set(token.expiresAt.timeIntervalSince1970, forKey: AppUserDefaultsKeys.expiresAt)

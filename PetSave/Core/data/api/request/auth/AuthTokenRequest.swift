@@ -5,7 +5,7 @@ enum AuthTokenRequest: RequestProtocol {
   case auth
 
   var path: String {
-    "/v2/oath2/token"
+    "/v2/oauth2/token"
   }
 
   var params: [String: Any] {

@@ -1,6 +1,3 @@
-
-import Foundation
-
 enum AnimalsRequest: RequestProtocol {
   case getAnimalsWith(page: Int, latitude: Double?, longitude: Double?)
   case getAnimalsBy(name: String, age: String?, type: String?)
@@ -9,7 +6,7 @@ enum AnimalsRequest: RequestProtocol {
     "/v2/animals"
   }
 
-  var urlParams: [String : String?] {
+  var urlParams: [String: String?] {
     switch self {
     case let .getAnimalsWith(page, latitude, longitude):
       var params = ["page": String(page)]

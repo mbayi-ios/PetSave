@@ -1,4 +1,3 @@
-
 import Foundation
 
 struct APIToken {
@@ -8,6 +7,7 @@ struct APIToken {
   private let requestedAt = Date()
 }
 
+// MARK: - Codable
 extension APIToken: Codable {
   enum CodingKeys: String, CodingKey {
     case tokenType
@@ -16,6 +16,7 @@ extension APIToken: Codable {
   }
 }
 
+// MARK: - Helper properties
 extension APIToken {
   var expiresAt: Date {
     Calendar.current.date(byAdding: .second, value: expiresIn, to: requestedAt) ?? Date()
